@@ -1,83 +1,140 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QVBoxLayout, QWidget, QGridLayout
+import serial
+import serial.tools.list_ports
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QVBoxLayout, QWidget, QGridLayout, QComboBox, QLineEdit, QPushButton, QHBoxLayout, QMessageBox
 from PyQt5.QtGui import QGuiApplication, QColor, QPixmap, QImage
-from PyQt5.QtCore import QTimer, Qt
+from PyQt5.QtCore import QTimer, Qt, QThread, pyqtSignal
 
 # 假设你有一个函数来控制 RGB 灯带
-def set_led_color(led_index, color):
-    # 这里应该是你的代码，用于设置第 led_index 个 LED 的颜色
-    # 例如，通过串口发送数据到你的硬件设备
-    print(f"LED {led_index}: {color}")
+def set_led_color(led_index, color, serial_port):
+    # 将颜色转换为字节数据
+    red = color[0]
+    green = color[1]
+    blue = color[2]
+    data = bytes([led_index, red, green, blue])
+    serial_port.write(data)
+    # print(f"LED {led_index}: {color}")
 
 class ColorPicker(QMainWindow):
     def __init__(self):
         super().__init__()
         self.led_labels = []  # 初始化 led_labels 为一个空列表
+        self.serial_port = None
         self.initUI()
+        self.updateColorsThread = UpdateColorsThread(self)
+        self.updateColorsThread.colorUpdated.connect(self.update_led_color)
+        self.updateColorsThread.start()
 
     def initUI(self):
         self.setWindowTitle('Screen Color Picker')
-        self.setGeometry(100, 100, 640, 480)
+        self.setGeometry(100, 100, 100, 100)
 
         self.central_widget = QWidget()
         self.setCentralWidget(self.central_widget)
 
-        self.grid_layout = QGridLayout()
-        self.central_widget.setLayout(self.grid_layout)
+        self.main_layout = QVBoxLayout()
+        self.central_widget.setLayout(self.main_layout)
 
         # 创建 8x8 的 LED 网格
+        self.grid_layout = QGridLayout()
         for i in range(8):
             for j in range(8):
                 label = QLabel()
-                label.setFixedSize(50, 50)
+                label.setFixedSize(10, 10)
                 label.setStyleSheet("background-color: black;")
                 self.grid_layout.addWidget(label, i, j)
                 self.led_labels.append(label)  # 将 label 添加到 led_labels 列表中
 
-        self.timer = QTimer(self)
-        self.timer.timeout.connect(self.updateColors)
-        self.timer.start(500)  # Update every 1000ms
+        # 串口选择和波特率设置
+        self.serial_layout = QHBoxLayout()
+        self.serial_combo = QComboBox()
+        self.baudrate_edit = QLineEdit("115200")
+        self.connect_button = QPushButton("Connect")
+        self.connect_button.clicked.connect(self.connect_serial)
 
-    def updateColors(self):
-        screen_geometry = QGuiApplication.primaryScreen().geometry()
-        screen_width = screen_geometry.width()
-        screen_height = screen_geometry.height()
-        print("screen_width:",screen_width," screen_height:",screen_height)
-        # Divide the screen into 64 regions (8x8 grid)
-        region_width = screen_width // 8
-        region_height = screen_height // 8
+        self.serial_layout.addWidget(self.serial_combo)
+        self.serial_layout.addWidget(self.baudrate_edit)
+        self.serial_layout.addWidget(self.connect_button)
 
-        for i in range(8):
-            for j in range(8):
-                x = j * region_width
-                y = i * region_height
-                pixmap = QGuiApplication.primaryScreen().grabWindow(0, x, y, region_width, region_height)
-                image = pixmap.toImage()
+        self.main_layout.addLayout(self.grid_layout)
+        self.main_layout.addLayout(self.serial_layout)
 
-                # Calculate the average color of the region
-                total_red = 0
-                total_green = 0
-                total_blue = 0
-                pixel_count = 0
+        self.update_serial_ports()
 
-                for y in range(region_height):
-                    for x in range(region_width):
-                        color = QColor(image.pixel(x, y))
-                        total_red += color.red()
-                        total_green += color.green()
-                        total_blue += color.blue()
-                        pixel_count += 1
+    def update_serial_ports(self):
+        ports = serial.tools.list_ports.comports()
+        for port in ports:
+            self.serial_combo.addItem(port.device)
 
-                avg_red = total_red // pixel_count
-                avg_green = total_green // pixel_count
-                avg_blue = total_blue // pixel_count
-                print(avg_red,avg_green,avg_blue)
-                rgb888 = (avg_red, avg_green, avg_blue)
-                led_index = i * 8 + j
-                # set_led_color(led_index, rgb888)
+    def connect_serial(self):
+        port_name = self.serial_combo.currentText()
+        baudrate = int(self.baudrate_edit.text())
+        try:
+            self.serial_port = serial.Serial(port_name, baudrate, timeout=1)
+            QMessageBox.information(self, "Connected", f"Connected to {port_name} at {baudrate} baud")
+        except serial.SerialException as e:
+            QMessageBox.critical(self, "Error", f"Failed to connect: {e}")
 
-                # 更新 GUI 中的 LED 颜色
-                self.led_labels[led_index].setStyleSheet(f"background-color: rgb({avg_red}, {avg_green}, {avg_blue});")
+    def update_led_color(self, led_index, color):
+        avg_red, avg_green, avg_blue = color
+        self.led_labels[led_index].setStyleSheet(f"background-color: rgb({avg_red}, {avg_green}, {avg_blue});")
+        if self.serial_port:
+            set_led_color(led_index, color, self.serial_port)
+
+class UpdateColorsThread(QThread):
+    colorUpdated = pyqtSignal(int, tuple)
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.parent = parent
+
+    def run(self):
+        while True:
+            if self.parent.serial_port is None or not self.parent.serial_port.is_open:
+                print("Serial port not connected or not open")
+                self.msleep(10)  # 等待500ms
+                continue
+
+            screen_geometry = QGuiApplication.primaryScreen().geometry()
+            screen_width = screen_geometry.width()
+            screen_height = screen_geometry.height()
+
+            # Divide the screen into 64 regions (8x8 grid)
+            region_width = screen_width // 8
+            region_height = screen_height // 8
+
+            for i in range(8):
+                for j in range(8):
+                    x = j * region_width
+                    y = i * region_height
+                    pixmap = QGuiApplication.primaryScreen().grabWindow(0, x, y, region_width, region_height)
+                    image = pixmap.toImage()
+
+                    # Calculate the average color of the region
+                    total_red = 0
+                    total_green = 0
+                    total_blue = 0
+                    pixel_count = 0
+
+                    for y in range(20):
+                        for x in range(20):
+                            color = QColor(image.pixel(x, y))
+                            total_red += color.red()
+                            total_green += color.green()
+                            total_blue += color.blue()
+                            pixel_count += 1
+
+                    avg_red = total_red // pixel_count
+                    avg_green = total_green // pixel_count
+                    avg_blue = total_blue // pixel_count
+
+                    rgb888 = (avg_red, avg_green, avg_blue)
+                    led_index = i * 8 + j
+
+                    # 发出信号更新 GUI
+                    self.colorUpdated.emit(led_index, rgb888)
+
+            self.msleep(100)  # 等待500ms
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
