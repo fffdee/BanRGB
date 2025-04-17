@@ -4,6 +4,8 @@ import serial.tools.list_ports
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QVBoxLayout, QWidget, QGridLayout, QComboBox, QLineEdit, QPushButton, QHBoxLayout, QMessageBox
 from PyQt5.QtGui import QGuiApplication, QColor, QPixmap, QImage
 from PyQt5.QtCore import QTimer, Qt, QThread, pyqtSignal
+import random
+from pycaw.pycaw import AudioUtilities
 
 # 假设你有一个函数来控制 RGB 灯带
 def set_led_colors(colors, serial_port):
@@ -24,10 +26,15 @@ class ColorPicker(QMainWindow):
         self.serial_port = None
         self.led_count = 64  # 默认灯数量
         self.colors = []  # 用于存储所有LED的颜色
+        self.mode = "Screen Color"  # 默认模式
+        self.is_playing = False  # 是否正在播放音乐或视频
         self.initUI()
         self.updateColorsThread = UpdateColorsThread(self)
         self.updateColorsThread.colorUpdated.connect(self.update_led_color)
         self.updateColorsThread.start()
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.check_audio_status)
+        self.timer.start(500)  # 每500ms检查一次音频状态
 
     def initUI(self):
         self.setWindowTitle('Screen Color Picker')
@@ -57,6 +64,12 @@ class ColorPicker(QMainWindow):
         self.led_count_button = QPushButton("Update")
         self.led_count_button.clicked.connect(self.update_led_count)
 
+        # 模式选择
+        self.mode_layout = QHBoxLayout()
+        self.mode_combo = QComboBox()
+        self.mode_combo.addItems(["Screen Color", "Music Rhythm"])
+        self.mode_combo.currentTextChanged.connect(self.update_mode)
+
         self.serial_layout.addWidget(self.serial_combo)
         self.serial_layout.addWidget(self.baudrate_edit)
         self.serial_layout.addWidget(self.connect_button)
@@ -65,9 +78,13 @@ class ColorPicker(QMainWindow):
         self.led_count_layout.addWidget(self.led_count_edit)
         self.led_count_layout.addWidget(self.led_count_button)
 
+        self.mode_layout.addWidget(QLabel("Mode:"))
+        self.mode_layout.addWidget(self.mode_combo)
+
         self.main_layout.addLayout(self.grid_layout)
         self.main_layout.addLayout(self.serial_layout)
         self.main_layout.addLayout(self.led_count_layout)
+        self.main_layout.addLayout(self.mode_layout)
 
         self.update_serial_ports()
 
@@ -126,6 +143,28 @@ class ColorPicker(QMainWindow):
         except ValueError:
             QMessageBox.critical(self, "Error", "Invalid LED count. Please enter a positive integer.")
 
+    def update_mode(self, mode):
+        self.mode = mode
+        print(f"Mode changed to: {mode}")
+
+    def check_audio_status(self):
+        sessions = AudioUtilities.GetAllSessions()
+        self.is_playing = False
+        for session in sessions:
+            if session.State == 1:  # STATE_PLAYING
+                self.is_playing = True
+                break
+        if not self.is_playing:
+            self.turn_off_leds()
+
+    def turn_off_leds(self):
+        if self.serial_port:
+            off_color = (0, 0, 0)
+            self.colors = [off_color] * self.led_count
+            self.send_colors_to_serial()
+            for label in self.led_labels:
+                label.setStyleSheet("background-color: black;")
+
 class UpdateColorsThread(QThread):
     colorUpdated = pyqtSignal(int, tuple)
 
@@ -139,45 +178,62 @@ class UpdateColorsThread(QThread):
                 self.msleep(10)  # 等待10ms
                 continue
 
-            screen_geometry = QGuiApplication.primaryScreen().geometry()
-            screen_width = screen_geometry.width()
-            screen_height = screen_geometry.height()
-
-            rows = int(self.parent.led_count ** 0.5)
-            cols = rows
-            region_width = screen_width // cols
-            region_height = screen_height // rows
-
-            for i in range(rows):
-                for j in range(cols):
-                    led_index = i * cols + j
-                    x = j * region_width
-                    y = i * region_height
-                    pixmap = QGuiApplication.primaryScreen().grabWindow(0, x, y, region_width, region_height)
-                    image = pixmap.toImage()
-
-                    total_red = 0
-                    total_green = 0
-                    total_blue = 0
-                    pixel_count = 0
-
-                    for y in range(50):
-                        for x in range(50):
-                            color = QColor(image.pixel(x, y))
-                            total_red += color.red()
-                            total_green += color.green()
-                            total_blue += color.blue()
-                            pixel_count += 1
-
-                    avg_red = total_red // pixel_count
-                    avg_green = total_green // pixel_count
-                    avg_blue = total_blue // pixel_count
-
-                    rgb888 = (avg_red, avg_green, avg_blue)
-
-                    self.colorUpdated.emit(led_index, rgb888)
+            if self.parent.mode == "Screen Color":
+                self.update_screen_colors()
+            elif self.parent.mode == "Music Rhythm":
+                self.update_music_rhythm_colors()
 
             self.msleep(10)  # 减少等待时间，提高刷新速度
+
+    def update_screen_colors(self):
+        screen_geometry = QGuiApplication.primaryScreen().geometry()
+        screen_width = screen_geometry.width()
+        screen_height = screen_geometry.height()
+
+        rows = int(self.parent.led_count ** 0.5)
+        cols = rows
+        region_width = screen_width // cols
+        region_height = screen_height // rows
+
+        for i in range(rows):
+            for j in range(cols):
+                led_index = i * cols + j
+                x = j * region_width
+                y = i * region_height
+                pixmap = QGuiApplication.primaryScreen().grabWindow(0, x, y, region_width, region_height)
+                image = pixmap.toImage()
+
+                total_red = 0
+                total_green = 0
+                total_blue = 0
+                pixel_count = 0
+
+                for y in range(50):
+                    for x in range(50):
+                        color = QColor(image.pixel(x, y))
+                        total_red += color.red()
+                        total_green += color.green()
+                        total_blue += color.blue()
+                        pixel_count += 1
+
+                avg_red = total_red // pixel_count
+                avg_green = total_green // pixel_count
+                avg_blue = total_blue // pixel_count
+
+                rgb888 = (avg_red, avg_green, avg_blue)
+
+                self.colorUpdated.emit(led_index, rgb888)
+
+    def update_music_rhythm_colors(self):
+        if not self.parent.is_playing:
+            return
+        colors = []
+        for i in range(self.parent.led_count):
+            red = random.randint(0, 255)
+            green = random.randint(0, 255)
+            blue = random.randint(0, 255)
+            colors.append((red, green, blue))
+            self.colorUpdated.emit(i, (red, green, blue))
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
