@@ -154,7 +154,7 @@ class ColorPicker(QMainWindow):
             if session.State == 1:  # STATE_PLAYING
                 self.is_playing = True
                 break
-        if not self.is_playing:
+        if not self.is_playing and self.mode == "Music Rhythm":
             self.turn_off_leds()
 
     def turn_off_leds(self):
