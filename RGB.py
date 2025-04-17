@@ -4,6 +4,7 @@ import serial.tools.list_ports
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QVBoxLayout, QWidget, QGridLayout, QComboBox, QLineEdit, QPushButton, QHBoxLayout, QMessageBox
 from PyQt5.QtGui import QGuiApplication, QColor, QPixmap, QImage
 from PyQt5.QtCore import QTimer, Qt, QThread, pyqtSignal
+import random
 
 # 假设你有一个函数来控制 RGB 灯带
 def set_led_color(led_index, color, serial_port):
@@ -11,7 +12,7 @@ def set_led_color(led_index, color, serial_port):
     red = color[0]
     green = color[1]
     blue = color[2]
-    data = bytes([led_index, red, green, blue])
+    data = bytes([0xEA, led_index, red, green, blue])
     serial_port.write(data)
     # print(f"LED {led_index}: {color}")
 
@@ -92,7 +93,7 @@ class UpdateColorsThread(QThread):
         while True:
             if self.parent.serial_port is None or not self.parent.serial_port.is_open:
                 print("Serial port not connected or not open")
-                self.msleep(10)  # 等待500ms
+                self.msleep(10)  # 等待10ms
                 continue
 
             screen_geometry = QGuiApplication.primaryScreen().geometry()
@@ -103,21 +104,30 @@ class UpdateColorsThread(QThread):
             region_width = screen_width // 8
             region_height = screen_height // 8
 
-            for i in range(8):
-                for j in range(8):
-                    x = j * region_width
-                    y = i * region_height
+            # 从中间开始向两边扩展的顺序
+            middle = 32  # 中间索引
+            for offset in range(32):
+                for direction in [1, -1]:
+                    led_index = middle + offset * direction
+                    if led_index < 0 or led_index >= 64:
+                        continue  # 跳过无效索引
+
+                    # 计算对应的行列
+                    row = led_index // 8
+                    col = led_index % 8
+                    x = col * region_width
+                    y = row * region_height
                     pixmap = QGuiApplication.primaryScreen().grabWindow(0, x, y, region_width, region_height)
                     image = pixmap.toImage()
 
-                    # Calculate the average color of the region
+                    # 计算区域的平均颜色
                     total_red = 0
                     total_green = 0
                     total_blue = 0
                     pixel_count = 0
 
-                    for y in range(20):
-                        for x in range(20):
+                    for y in range(30):
+                        for x in range(30):
                             color = QColor(image.pixel(x, y))
                             total_red += color.red()
                             total_green += color.green()
@@ -129,12 +139,11 @@ class UpdateColorsThread(QThread):
                     avg_blue = total_blue // pixel_count
 
                     rgb888 = (avg_red, avg_green, avg_blue)
-                    led_index = i * 8 + j
 
                     # 发出信号更新 GUI
                     self.colorUpdated.emit(led_index, rgb888)
 
-            self.msleep(100)  # 等待500ms
+            self.msleep(50)  # 减少等待时间，提高刷新速度
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
