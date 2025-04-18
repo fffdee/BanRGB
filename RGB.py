@@ -4,7 +4,8 @@ import serial.tools.list_ports
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QVBoxLayout, QWidget, QGridLayout, QComboBox, QLineEdit, QPushButton, QHBoxLayout, QMessageBox, QColorDialog
 from PyQt5.QtGui import QGuiApplication, QColor, QPixmap, QImage, QIcon
 from PyQt5.QtCore import QTimer, Qt, QThread, pyqtSignal
-import random
+import configparser
+import os
 
 # 假设你有一个函数来控制 RGB 灯带
 def set_led_color(led_index, color, serial_port):
@@ -25,10 +26,47 @@ class ColorPicker(QMainWindow):
         self.selected_color = QColor(255, 255, 255)  # 默认颜色为白色
         self.mode = "Screen Color"  # 默认模式
         self.color_picker_button = None  # 调色盘按钮
+        self.config_file = "config.ini"
+        self.load_config()
         self.initUI()
         self.updateColorsThread = UpdateColorsThread(self)
         self.updateColorsThread.colorUpdated.connect(self.update_led_color)
         self.updateColorsThread.start()
+
+    def load_config(self):
+        self.config = configparser.ConfigParser()
+        if not os.path.exists(self.config_file):
+            # 如果配置文件不存在，创建默认配置
+            self.config['DEFAULT'] = {
+                'Mode': 'Screen Color',
+                'LEDCount': '64',
+                'CustomColorRed': '255',
+                'CustomColorGreen': '255',
+                'CustomColorBlue': '255'
+            }
+            with open(self.config_file, 'w') as configfile:
+                self.config.write(configfile)
+        else:
+            # 读取配置文件
+            self.config.read(self.config_file)
+            self.mode = self.config['DEFAULT']['Mode']
+            self.led_count = int(self.config['DEFAULT']['LEDCount'])
+            self.selected_color = QColor(
+                int(self.config['DEFAULT']['CustomColorRed']),
+                int(self.config['DEFAULT']['CustomColorGreen']),
+                int(self.config['DEFAULT']['CustomColorBlue'])
+            )
+
+    def save_config(self):
+        self.config['DEFAULT'] = {
+            'Mode': self.mode,
+            'LEDCount': str(self.led_count),
+            'CustomColorRed': str(self.selected_color.red()),
+            'CustomColorGreen': str(self.selected_color.green()),
+            'CustomColorBlue': str(self.selected_color.blue())
+        }
+        with open(self.config_file, 'w') as configfile:
+            self.config.write(configfile)
 
     def initUI(self):
         self.setWindowTitle('BanRGB')
@@ -81,6 +119,8 @@ class ColorPicker(QMainWindow):
         self.main_layout.addLayout(self.mode_layout)
 
         self.update_serial_ports()
+        self.mode_combo.setCurrentText(self.mode)  # 设置模式选择框的当前模式
+        self.toggle_color_picker()
 
     def update_serial_ports(self):
         ports = serial.tools.list_ports.comports()
@@ -126,12 +166,13 @@ class ColorPicker(QMainWindow):
             if new_led_count > 0:
                 self.led_count = new_led_count
                 self.create_led_grid()
+                self.save_config()
         except ValueError:
             QMessageBox.critical(self, "Error", "Invalid LED count. Please enter a positive integer.")
 
     def update_mode(self, mode):
         self.mode = mode
-        print(f"Mode changed to: {mode}")
+        self.save_config()
         self.toggle_color_picker()
 
     def toggle_color_picker(self):
@@ -144,12 +185,14 @@ class ColorPicker(QMainWindow):
             self.color_picker_button = QPushButton("Select Color")
             self.color_picker_button.clicked.connect(self.select_color)
             self.mode_layout.addWidget(self.color_picker_button)
+            self.update_custom_colors()  # 确保自定义模式的颜色正确显示
 
     def select_color(self):
         color = QColorDialog.getColor(self.selected_color, self, "Select Color")
         if color.isValid():
             self.selected_color = color
             self.update_custom_colors()
+            self.save_config()
 
     def update_custom_colors(self):
         # 更新所有LED为选定的颜色
