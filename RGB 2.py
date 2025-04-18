@@ -4,18 +4,17 @@ import serial.tools.list_ports
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QVBoxLayout, QWidget, QGridLayout, QComboBox, QLineEdit, QPushButton, QHBoxLayout, QMessageBox
 from PyQt5.QtGui import QGuiApplication, QColor, QPixmap, QImage
 from PyQt5.QtCore import QTimer, Qt, QThread, pyqtSignal
+import random
 
 # 假设你有一个函数来控制 RGB 灯带
-def set_led_colors(colors, serial_port):
-    # 将颜色列表转换为字节数据
-    data = bytearray()
-    for color in colors:
-        red = color[0]
-        green = color[1]
-        blue = color[2]
-        data.extend([0xEA, red, green, blue])  # 每个颜色数据前加上 0xEA
+def set_led_color(led_index, color, serial_port):
+    # 将颜色转换为字节数据
+    red = color[0]
+    green = color[1]
+    blue = color[2]
+    data = bytes([0xEA, led_index, red, green, blue])
     serial_port.write(data)
-    print(f"Sent {len(colors)} LED colors: {data}")
+    # print(f"LED {led_index}: {color}")
 
 class ColorPicker(QMainWindow):
     def __init__(self):
@@ -23,7 +22,6 @@ class ColorPicker(QMainWindow):
         self.led_labels = []  # 初始化 led_labels 为一个空列表
         self.serial_port = None
         self.led_count = 64  # 默认灯数量
-        self.colors = []  # 用于存储所有LED的颜色
         self.initUI()
         self.updateColorsThread = UpdateColorsThread(self)
         self.updateColorsThread.colorUpdated.connect(self.update_led_color)
@@ -52,7 +50,7 @@ class ColorPicker(QMainWindow):
 
         # 灯数量设置
         self.led_count_layout = QHBoxLayout()
-        self.led_count_edit = QLineEdit("64")
+        self.led_count_edit = QLineEdit(str(self.led_count))
         self.led_count_edit.setFixedWidth(50)
         self.led_count_button = QPushButton("Update")
         self.led_count_button.clicked.connect(self.update_led_count)
@@ -87,17 +85,10 @@ class ColorPicker(QMainWindow):
 
     def update_led_color(self, led_index, color):
         avg_red, avg_green, avg_blue = color
-        if led_index < len(self.led_labels):
+        if 0 <= led_index < len(self.led_labels):
             self.led_labels[led_index].setStyleSheet(f"background-color: rgb({avg_red}, {avg_green}, {avg_blue});")
         if self.serial_port:
-            self.colors.append(color)
-            if len(self.colors) == self.led_count:
-                self.send_colors_to_serial()
-
-    def send_colors_to_serial(self):
-        if self.serial_port:
-            set_led_colors(self.colors, self.serial_port)
-            self.colors.clear()
+            set_led_color(led_index, color, self.serial_port)
 
     def create_led_grid(self):
         # 清空现有的 LED 网格
@@ -121,10 +112,13 @@ class ColorPicker(QMainWindow):
             new_led_count = int(self.led_count_edit.text())
             if new_led_count > 0:
                 self.led_count = new_led_count
-                self.colors.clear()  # 清空颜色列表
                 self.create_led_grid()
         except ValueError:
             QMessageBox.critical(self, "Error", "Invalid LED count. Please enter a positive integer.")
+
+    def update_mode(self, mode):
+        self.mode = mode
+        print(f"Mode changed to: {mode}")
 
 class UpdateColorsThread(QThread):
     colorUpdated = pyqtSignal(int, tuple)
@@ -143,26 +137,36 @@ class UpdateColorsThread(QThread):
             screen_width = screen_geometry.width()
             screen_height = screen_geometry.height()
 
+            # Divide the screen into regions based on LED count
             rows = int(self.parent.led_count ** 0.5)
             cols = rows
             region_width = screen_width // cols
             region_height = screen_height // rows
 
-            for i in range(rows):
-                for j in range(cols):
-                    led_index = i * cols + j
-                    x = j * region_width
-                    y = i * region_height
+            # 从中间开始向两边扩展的顺序
+            middle = self.parent.led_count // 2  # 中间索引
+            for offset in range(middle):
+                for direction in [1, -1]:
+                    led_index = middle + offset * direction
+                    if led_index < 0 or led_index >= self.parent.led_count:
+                        continue  # 跳过无效索引
+
+                    # 计算对应的行列
+                    row = led_index // cols
+                    col = led_index % cols
+                    x = col * region_width
+                    y = row * region_height
                     pixmap = QGuiApplication.primaryScreen().grabWindow(0, x, y, region_width, region_height)
                     image = pixmap.toImage()
 
+                    # 计算区域的平均颜色
                     total_red = 0
                     total_green = 0
                     total_blue = 0
                     pixel_count = 0
 
-                    for y in range(50):
-                        for x in range(50):
+                    for y in range(region_height):
+                        for x in range(region_width):
                             color = QColor(image.pixel(x, y))
                             total_red += color.red()
                             total_green += color.green()
@@ -175,6 +179,7 @@ class UpdateColorsThread(QThread):
 
                     rgb888 = (avg_red, avg_green, avg_blue)
 
+                    # 发出信号更新 GUI
                     self.colorUpdated.emit(led_index, rgb888)
 
             self.msleep(10)  # 减少等待时间，提高刷新速度
