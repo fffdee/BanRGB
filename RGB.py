@@ -1,4 +1,5 @@
 import sys
+import time
 import serial
 import serial.tools.list_ports
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QVBoxLayout, QWidget, QGridLayout, QComboBox, QLineEdit, QPushButton, QHBoxLayout, QMessageBox, QColorDialog
@@ -197,6 +198,7 @@ class ColorPicker(QMainWindow):
     def update_custom_colors(self):
         # 更新所有LED为选定的颜色
         for i in range(self.led_count):
+            time.sleep(0.02)
             self.update_led_color(i, (self.selected_color.red(), self.selected_color.green(), self.selected_color.blue()))
 
 class ScreenColorMode:
@@ -226,8 +228,8 @@ class ScreenColorMode:
             total_blue = 0
             pixel_count = 0
 
-            for y in range(100):
-                for x in range(100):
+            for y in range(120):
+                for x in range(120):
                     color = QColor(image.pixel(x, y))
                     total_red += color.red()
                     total_green += color.green()
@@ -239,7 +241,7 @@ class ScreenColorMode:
             avg_blue = total_blue // pixel_count
 
             rgb888 = (avg_red, avg_green, avg_blue)
-
+            
             # 发出信号更新 GUI
             self.parent.updateColorsThread.colorUpdated.emit(led_index, rgb888)
 

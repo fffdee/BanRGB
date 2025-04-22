@@ -10,7 +10,7 @@
 
 // Which pin on the Arduino is connected to the NeoPixels?
 // On a Trinket or Gemma we suggest changing this to 1:
-#define LED_PIN    0
+#define LED_PIN    PA_7
 
 // How many NeoPixels are attached to the Arduino?
 #define LED_COUNT 64
@@ -18,6 +18,18 @@
 #define START_BYTE 0xEA
 #define DATA_LENGTH 4
 
+uint8_t led_map[LED_COUNT] = {
+
+  34,32,28,24,23,16,15,13,
+  35,33,29,25,22,17,14,12,
+  37,36,30,26,21,18,10,11,
+  39,38,31,27,20,19,8,9,
+  41,40,51,52,59,60,6,7,
+  43,42,50,53,58,61,4,5,
+  44,45,49,54,57,62,2,3,
+  46,47,48,55,56,63,0,1,
+
+};
 // Declare our NeoPixel strip object:
 Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
 
@@ -29,7 +41,7 @@ int dataIndex = 0;
 void setup() {
 
   Serial.begin(115200); // 初始化串口通信
-
+  pinMode(PB_1, OUTPUT);
   strip.begin();           // INITIALIZE NeoPixel strip object (REQUIRED)
   strip.show();            // Turn OFF all pixels ASAP
   strip.setBrightness(255); // Set BRIGHTNESS to about 1/5 (max = 255)
@@ -59,9 +71,10 @@ void rainbow(int wait) {
 void loop() {
 
     if(isReceiving == false){
-       strip.setPixelColor(receivedData[0],strip.Color(receivedData[1], receivedData[2], receivedData[3]));
+       strip.setPixelColor(led_map[receivedData[0]],strip.Color(receivedData[1], receivedData[2], receivedData[3]));
        strip.show();
     }
+    digitalWrite(PB_1, HIGH);
     //rainbow(10); 
 }
 
