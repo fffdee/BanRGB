@@ -11,6 +11,8 @@ import pyaudio
 import numpy as np
 import ctypes
 import colorsys
+import librosa
+
 np.set_printoptions(threshold=np.inf)
 # 设置线程模式为多线程
 ctypes.windll.ole32.CoInitializeEx(None, 0)  # COINIT_MULTITHREADED
@@ -222,8 +224,28 @@ class MusicRhythmMode:
         self.open_stream()
 
     def open_stream(self):
-        # 打开虚拟音频设备的输入流
-        self.stream = self.audio.open(format=pyaudio.paInt16, channels=1, rate=self.sample_rate, input=True, frames_per_buffer=self.fft_size)
+        # 自动选择名字中包含“CABLE Output”的设备
+        device_index = self.find_cable_output_device()
+        if device_index is None:
+            raise ValueError("No device with 'CABLE Output' found. Please check your device names.")
+
+        # 打开音频输入流
+        self.stream = self.audio.open(format=pyaudio.paInt16,
+                                      channels=2,  # 假设是立体声
+                                      rate=self.sample_rate,
+                                      input=True,
+                                      input_device_index=device_index,
+                                      frames_per_buffer=self.fft_size)
+
+    def find_cable_output_device(self):
+        info = self.audio.get_host_api_info_by_index(0)
+        num_devices = info.get('deviceCount')
+        for i in range(num_devices):
+            device_info = self.audio.get_device_info_by_host_api_device_index(0, i)
+            if "CABLE Output" in device_info.get('name'):
+                print(f"Selected device: {device_info.get('name')} (Index: {i})")
+                return i
+        return None
 
     def update_colors(self):
         if not self.stream.is_active():
@@ -241,28 +263,68 @@ class MusicRhythmMode:
         mid_freq_magnitude = np.mean(fft_magnitude[self.fft_size // 8:self.fft_size // 4])  # 中频
         high_freq_magnitude = np.mean(fft_magnitude[self.fft_size // 4:self.fft_size // 2])  # 高频
 
-        # 综合频率信息生成颜色
-        total_magnitude = low_freq_magnitude + mid_freq_magnitude + high_freq_magnitude
-        color = self.get_color_from_magnitude(total_magnitude)
-        print(f"Generated color: {color}")  # 打印生成的颜色值
+        # 检测节奏
+        rhythm = self.detect_rhythm(data)
 
+        # 综合频率信息和节奏信息生成颜色和亮度
+        color, brightness = self.get_color_and_brightness(low_freq_magnitude, mid_freq_magnitude, high_freq_magnitude, rhythm)
+
+        print(f"Generated color: {color}, Brightness: {brightness}")  # 打印生成的颜色和亮度值
+
+        # 根据响度调整亮灯的数量
+        num_lights = int(brightness / 255 * self.parent.led_count)
         for i in range(self.parent.led_count):
-            self.parent.updateColorsThread.colorUpdated.emit(i, color)
+            if i < num_lights:
+                self.parent.updateColorsThread.colorUpdated.emit(i, color)
+            else:
+                self.parent.updateColorsThread.colorUpdated.emit(i, (0, 0, 0))  # 关闭其他灯
 
-    def get_color_from_magnitude(self, magnitude):
+    def detect_rhythm(self, data):
+        # 确保数据是浮点数类型
+        data = data.astype(np.float32)
+        
+        # 归一化音频数据
+        data = data / np.max(np.abs(data))
+        
+        # 检查并修复非有限值
+        if not np.all(np.isfinite(data)):
+            print("Warning: Audio data contains non-finite values. Replacing with zero.")
+            data = np.where(np.isfinite(data), data, 0)
+        
+        # 使用 librosa 检测节奏
+        try:
+            tempo, beats = librosa.beat.beat_track(y=data, sr=self.sample_rate, hop_length=self.fft_size // 2)
+            return len(beats) > 0  # 如果检测到节奏，返回 True
+        except Exception as e:
+            print(f"Error detecting rhythm: {e}")
+            return False
+
+    def get_color_and_brightness(self, low_freq, mid_freq, high_freq, rhythm):
         threshold = 30
-        if magnitude < threshold:
-            return (0, 0, 0)  # 没有音频输入时，设置为黑色
+        max_magnitude = 5000  # 调整这个值以适应你的音频信号范围
+
+        # 根据频率信息生成颜色
+        total_magnitude = low_freq + mid_freq + high_freq
+        if total_magnitude < threshold:
+            return (0, 0, 0), 0  # 如果总能量低于阈值，返回黑色
+
+        hue = (total_magnitude - threshold) / (max_magnitude - threshold)
+        hue = hue % 1.0  # 确保 hue 在 [0, 1] 范围内
+
+        saturation = 1.0
+        value = 1.0
+        rgb = colorsys.hsv_to_rgb(hue, saturation, value)
+        red = int(rgb[0] * 255)
+        green = int(rgb[1] * 255)
+        blue = int(rgb[2] * 255)
+
+        # 根据节奏信息调整亮度
+        if rhythm:
+            brightness = 255  # 有节奏时，亮度最高
         else:
-            hue = (magnitude - threshold) / (5000 - threshold)
-            hue = hue % 1.0
-            saturation = 1.0
-            value = 1.0
-            rgb = colorsys.hsv_to_rgb(hue, saturation, value)
-            red = int(rgb[0] * 255)
-            green = int(rgb[1] * 255)
-            blue = int(rgb[2] * 255)
-            return red, green, blue
+            brightness = int(total_magnitude / max_magnitude * 255)  # 根据音频强度调整亮度
+
+        return (red, green, blue), brightness
 
 
 class ScreenColorMode:
