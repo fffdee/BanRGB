@@ -1,7 +1,7 @@
 Dependencies for Project 'air001_template', Target 'Target 1': (DO NOT MODIFY !)
-F (.\AIR001xx_HAL_Driver\Src\air001xx_hal.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal.o -MD)
+F (.\AIR001xx_HAL_Driver\Src\air001xx_hal.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -Os -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal.o -MD)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x680CAA92)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_def.h)(0x66B7CC8F)
 I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001xx.h)(0x6586D652)
@@ -23,9 +23,10 @@ I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h)(0x66B7CC8F)
-F (.\AIR001xx_HAL_Driver\Src\air001xx_hal_cortex.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal_cortex.o -MD)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_iwdg.h)(0x66B7CC8F)
+F (.\AIR001xx_HAL_Driver\Src\air001xx_hal_cortex.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -Os -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal_cortex.o -MD)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x680CAA92)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_def.h)(0x66B7CC8F)
 I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001xx.h)(0x6586D652)
@@ -47,9 +48,10 @@ I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h)(0x66B7CC8F)
-F (.\AIR001xx_HAL_Driver\Src\air001xx_hal_crc.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal_crc.o -MD)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_iwdg.h)(0x66B7CC8F)
+F (.\AIR001xx_HAL_Driver\Src\air001xx_hal_crc.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -Os -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal_crc.o -MD)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x680CAA92)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_def.h)(0x66B7CC8F)
 I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001xx.h)(0x6586D652)
@@ -71,9 +73,10 @@ I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h)(0x66B7CC8F)
-F (.\AIR001xx_HAL_Driver\Src\air001xx_hal_exti.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal_exti.o -MD)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_iwdg.h)(0x66B7CC8F)
+F (.\AIR001xx_HAL_Driver\Src\air001xx_hal_exti.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -Os -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal_exti.o -MD)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x680CAA92)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_def.h)(0x66B7CC8F)
 I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001xx.h)(0x6586D652)
@@ -95,10 +98,11 @@ I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_iwdg.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_exti.h)(0x66B7CC8F)
-F (.\AIR001xx_HAL_Driver\Src\air001xx_hal_gpio.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal_gpio.o -MD)
+F (.\AIR001xx_HAL_Driver\Src\air001xx_hal_gpio.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -Os -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal_gpio.o -MD)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x680CAA92)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_def.h)(0x66B7CC8F)
 I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001xx.h)(0x6586D652)
@@ -120,9 +124,10 @@ I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h)(0x66B7CC8F)
-F (.\AIR001xx_HAL_Driver\Src\air001xx_hal_rcc.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal_rcc.o -MD)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_iwdg.h)(0x66B7CC8F)
+F (.\AIR001xx_HAL_Driver\Src\air001xx_hal_rcc.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -Os -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal_rcc.o -MD)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x680CAA92)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_def.h)(0x66B7CC8F)
 I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001xx.h)(0x6586D652)
@@ -144,15 +149,16 @@ I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_iwdg.h)(0x66B7CC8F)
 F (.\AIR001xx_HAL_Driver\Inc\air001xx_hal.h)(0x66B7CC8F)()
 F (.\AIR001xx_HAL_Driver\Inc\air001xx_hal_cortex.h)(0x66B7CC8F)()
 F (.\AIR001xx_HAL_Driver\Inc\air001xx_hal_crc.h)(0x66B7CC8F)()
 F (.\AIR001xx_HAL_Driver\Inc\air001xx_hal_exti.h)(0x66B7CC8F)()
 F (.\AIR001xx_HAL_Driver\Inc\air001xx_hal_gpio.h)(0x66B7CC8F)()
 F (.\AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc.h)(0x66B7CC8F)()
-F (.\AIR001xx_HAL_Driver\Src\air001xx_hal_flash.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal_flash.o -MD)
+F (.\AIR001xx_HAL_Driver\Src\air001xx_hal_flash.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -Os -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal_flash.o -MD)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x680CAA92)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_def.h)(0x66B7CC8F)
 I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001xx.h)(0x6586D652)
@@ -174,9 +180,10 @@ I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h)(0x66B7CC8F)
-F (.\AIR001xx_HAL_Driver\Src\air001xx_hal_pwr.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal_pwr.o -MD)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_iwdg.h)(0x66B7CC8F)
+F (.\AIR001xx_HAL_Driver\Src\air001xx_hal_pwr.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -Os -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal_pwr.o -MD)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x680CAA92)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_def.h)(0x66B7CC8F)
 I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001xx.h)(0x6586D652)
@@ -198,13 +205,14 @@ I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_iwdg.h)(0x66B7CC8F)
 F (.\AIR001xx_HAL_Driver\Inc\air001xx_hal_flash.h)(0x66B7CC8F)()
 F (.\AIR001xx_HAL_Driver\Inc\air001xx_hal_pwr.h)(0x66B7CC8F)()
 F (.\AIR001xx_HAL_Driver\Inc\air001xx_hal_uart.h)(0x66B7CC8F)()
 F (.\AIR001xx_HAL_Driver\Inc\air001xx_hal_uart_ex.h)(0x66B7CC8F)()
-F (.\AIR001xx_HAL_Driver\Src\air001xx_hal_uart.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal_uart.o -MD)
+F (.\AIR001xx_HAL_Driver\Src\air001xx_hal_uart.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -Os -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal_uart.o -MD)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x680CAA92)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_def.h)(0x66B7CC8F)
 I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001xx.h)(0x6586D652)
@@ -226,10 +234,11 @@ I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_iwdg.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_uart.h)(0x66B7CC8F)
-F (.\AIR001xx_HAL_Driver\Src\air001xx_hal_dma.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal_dma.o -MD)
+F (.\AIR001xx_HAL_Driver\Src\air001xx_hal_dma.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -Os -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal_dma.o -MD)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x680CAA92)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_def.h)(0x66B7CC8F)
 I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001xx.h)(0x6586D652)
@@ -251,9 +260,10 @@ I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h)(0x66B7CC8F)
-F (.\AIR001xx_HAL_Driver\Src\air001xx_hal_spi.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal_spi.o -MD)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_iwdg.h)(0x66B7CC8F)
+F (.\AIR001xx_HAL_Driver\Src\air001xx_hal_spi.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -Os -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal_spi.o -MD)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x680CAA92)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_def.h)(0x66B7CC8F)
 I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001xx.h)(0x6586D652)
@@ -275,8 +285,34 @@ I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h)(0x66B7CC8F)
-F (.\User\air001xx_hal_conf.h)(0x66B7CC8F)()
-F (.\User\air001xx_it.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_it.o -MD)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_iwdg.h)(0x66B7CC8F)
+F (.\AIR001xx_HAL_Driver\Src\air001xx_hal_iwdg.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -Os -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_hal_iwdg.o -MD)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x680CAA92)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_def.h)(0x66B7CC8F)
+I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001xx.h)(0x6586D652)
+I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001_dev.h)(0x6586D652)
+I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\core_cm0plus.h)(0x60D3E8E2)
+I (E:\keil5\ARM\ARMCLANG\include\stdint.h)(0x5DDFFD72)
+I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_version.h)(0x60D3E8E2)
+I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_compiler.h)(0x60D3E8E2)
+I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_armclang.h)(0x60D3E8E2)
+I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\system_air001xx.h)(0x6586D652)
+I (E:\keil5\ARM\ARMCLANG\include\stdio.h)(0x5DDFFD72)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc_ex.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_gpio.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_gpio_ex.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_flash.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_pwr.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_cortex.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_iwdg.h)(0x66B7CC8F)
+F (.\User\air001xx_hal_conf.h)(0x680CAA92)()
+F (.\User\air001xx_it.c)(0x680E1DF5)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -Os -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/air001xx_it.o -MD)
 I (User\air001xx_it.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_gpio.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_def.h)(0x66B7CC8F)
@@ -290,9 +326,9 @@ I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_armclang.h)(0x60D3E8E2
 I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\system_air001xx.h)(0x6586D652)
 I (E:\keil5\ARM\ARMCLANG\include\stdio.h)(0x5DDFFD72)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_gpio_ex.h)(0x66B7CC8F)
-I (User\uart\uart.h)(0x66B7CC8F)
+I (User\uart\uart.h)(0x680BB653)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x680CAA92)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc_ex.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_flash.h)(0x66B7CC8F)
@@ -302,11 +338,14 @@ I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_iwdg.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_uart.h)(0x66B7CC8F)
+I (User\main.h)(0x680E5291)
+I (E:\keil5\ARM\ARMCLANG\include\string.h)(0x5DDFFD6C)
 F (.\User\air001xx_it.h)(0x66B7CC8F)()
-F (.\User\main.c)(0x680673EC)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/main.o -MD)
+F (.\User\main.c)(0x680E6844)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -Os -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/main.o -MD)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x680CAA92)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_def.h)(0x66B7CC8F)
 I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001xx.h)(0x6586D652)
@@ -328,10 +367,14 @@ I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h)(0x66B7CC8F)
-I (User\uart\uart.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_iwdg.h)(0x66B7CC8F)
+I (User\uart\uart.h)(0x680BB653)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_uart.h)(0x66B7CC8F)
-F (.\User\uart\uart.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/uart.o -MD)
-I (User\uart\uart.h)(0x66B7CC8F)
+I (E:\keil5\ARM\ARMCLANG\include\string.h)(0x5DDFFD6C)
+I (User\main.h)(0x680E5291)
+I (E:\keil5\ARM\ARMCLANG\include\stdlib.h)(0x5DDFFD6A)
+F (.\User\uart\uart.c)(0x680BB669)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -Os -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/uart.o -MD)
+I (User\uart\uart.h)(0x680BB653)
 I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001_dev.h)(0x6586D652)
 I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\core_cm0plus.h)(0x60D3E8E2)
 I (E:\keil5\ARM\ARMCLANG\include\stdint.h)(0x5DDFFD72)
@@ -340,7 +383,7 @@ I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_compiler.h)(0x60D3E8E2
 I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_armclang.h)(0x60D3E8E2)
 I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\system_air001xx.h)(0x6586D652)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x680CAA92)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_def.h)(0x66B7CC8F)
 I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001xx.h)(0x6586D652)
@@ -355,13 +398,11 @@ I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_iwdg.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_uart.h)(0x66B7CC8F)
-F (.\User\SPI\spi.c)(0x68051C4D)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/spi_1.o -MD)
-I (User\SPI\spi.h)(0x68066F68)
-I (User\DEF\def_conf.h)(0x68052AA6)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc.h)(0x66B7CC8F)
+F (.\User\SPI\spi.c)(0x680E5291)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -Os -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/spi_1.o -MD)
+I (User\SPI\spi.h)(0x680E520C)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_def.h)(0x66B7CC8F)
 I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001xx.h)(0x6586D652)
 I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001_dev.h)(0x6586D652)
@@ -372,105 +413,22 @@ I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_compiler.h)(0x60D3E8E2
 I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_armclang.h)(0x60D3E8E2)
 I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\system_air001xx.h)(0x6586D652)
 I (E:\keil5\ARM\ARMCLANG\include\stdio.h)(0x5DDFFD72)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc_ex.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_gpio.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_gpio_ex.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_flash.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_pwr.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_cortex.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h)(0x66B7CC8F)
-I (User\flash\flash.h)(0x68066F26)
-I (User\HSV2RGB\hsvrgb.h)(0x68066EBD)
-I (User\ws2812b\ws2812b.h)(0x68066F72)
-F (.\User\HSV2RGB\hsvrgb.c)(0x661EDBBF)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/hsvrgb.o -MD)
-I (User\HSV2RGB\hsvrgb.h)(0x68066EBD)
-I (User\ws2812b\ws2812b.h)(0x68066F72)
-I (User\DEF\def_conf.h)(0x68052AA6)
+I (User\main.h)(0x680E5291)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x66B7CC8F)
+I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x680CAA92)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_def.h)(0x66B7CC8F)
-I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001xx.h)(0x6586D652)
-I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001_dev.h)(0x6586D652)
-I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\core_cm0plus.h)(0x60D3E8E2)
-I (E:\keil5\ARM\ARMCLANG\include\stdint.h)(0x5DDFFD72)
-I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_version.h)(0x60D3E8E2)
-I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_compiler.h)(0x60D3E8E2)
-I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_armclang.h)(0x60D3E8E2)
-I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\system_air001xx.h)(0x6586D652)
-I (E:\keil5\ARM\ARMCLANG\include\stdio.h)(0x5DDFFD72)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc_ex.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_gpio.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_gpio_ex.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_flash.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_pwr.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_cortex.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h)(0x66B7CC8F)
 I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h)(0x66B7CC8F)
-I (User\flash\flash.h)(0x68066F26)
-I (User\SPI\spi.h)(0x68066F68)
-I (E:\keil5\ARM\ARMCLANG\include\math.h)(0x5DDFFD6C)
-F (.\User\ws2812b\ws2812b.c)(0x680673C3)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/ws2812b.o -MD)
-I (User\ws2812b\ws2812b.h)(0x68066F72)
-I (User\DEF\def_conf.h)(0x68052AA6)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_def.h)(0x66B7CC8F)
-I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001xx.h)(0x6586D652)
-I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001_dev.h)(0x6586D652)
-I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\core_cm0plus.h)(0x60D3E8E2)
-I (E:\keil5\ARM\ARMCLANG\include\stdint.h)(0x5DDFFD72)
-I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_version.h)(0x60D3E8E2)
-I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_compiler.h)(0x60D3E8E2)
-I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_armclang.h)(0x60D3E8E2)
-I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\system_air001xx.h)(0x6586D652)
-I (E:\keil5\ARM\ARMCLANG\include\stdio.h)(0x5DDFFD72)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc_ex.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_gpio.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_gpio_ex.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_flash.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_pwr.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_cortex.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h)(0x66B7CC8F)
-I (User\flash\flash.h)(0x68066F26)
-I (User\HSV2RGB\hsvrgb.h)(0x68066EBD)
-I (User\SPI\spi.h)(0x68066F68)
-F (.\User\DEF\def_conf.c)(0x661EDBBF)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/def_conf.o -MD)
-I (User\DEF\def_conf.h)(0x68052AA6)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_def.h)(0x66B7CC8F)
-I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001xx.h)(0x6586D652)
-I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001_dev.h)(0x6586D652)
-I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\core_cm0plus.h)(0x60D3E8E2)
-I (E:\keil5\ARM\ARMCLANG\include\stdint.h)(0x5DDFFD72)
-I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_version.h)(0x60D3E8E2)
-I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_compiler.h)(0x60D3E8E2)
-I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_armclang.h)(0x60D3E8E2)
-I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\system_air001xx.h)(0x6586D652)
-I (E:\keil5\ARM\ARMCLANG\include\stdio.h)(0x5DDFFD72)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc_ex.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_gpio.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_gpio_ex.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_flash.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_pwr.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_cortex.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h)(0x66B7CC8F)
-I (AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h)(0x66B7CC8F)
-F (RTE\Device\AIR001Dev\startup_air001_dev.s)(0x66B7CC8F)(--cpu Cortex-M0+ -g --pd "__MICROLIB SETA 1"-I.\RTE\_Target_1-IE:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include-IE:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include--pd "__UVISION_VERSION SETA 527"--pd "_RTE_ SETA 1"--list .\listings\startup_air001_dev.lst--xref -o .\objects\startup_air001_dev.o--depend .\objects\startup_air001_dev.d)
-F (RTE\Device\AIR001Dev\system_air001xx.c)(0x66B7CC8F)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/system_air001xx.o -MD)
+I (AIR001xx_HAL_Driver\Inc\air001xx_hal_iwdg.h)(0x66B7CC8F)
+F (RTE\Device\AIR001Dev\startup_air001_dev.s)(0x680E3B99)(--cpu Cortex-M0+ -g --pd "__MICROLIB SETA 1"-I.\RTE\_Target_1-IE:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include-IE:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include--pd "__UVISION_VERSION SETA 527"--pd "_RTE_ SETA 1"--list .\listings\startup_air001_dev.lst--xref -o .\objects\startup_air001_dev.o--depend .\objects\startup_air001_dev.d)
+F (RTE\Device\AIR001Dev\system_air001xx.c)(0x680C7236)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -Os -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ./AIR001xx_HAL_Driver/Inc -I ./User -I "D:/Embedded Engineer/Keil5/Packs/Keil/AIR001_DFP/1.1.0/Device/Include" -I ./User/uart -I ./User/ws2812b -I ./User/HSV2RGB -I ./User/SPI -I ./User/flash -I ./User/DEF-I./RTE/_Target_1-IE:/keil5/pack/ARM/CMSIS/5.8.0/CMSIS/Core/Include-IE:/keil5/pack/Keil/AIR001_DFP/1.1.2/Device/Include-D__UVISION_VERSION="527" -D_RTE_ -DAIR001_DEV-o ./objects/system_air001xx.o -MD)
 I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001xx.h)(0x6586D652)
 I (E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001_dev.h)(0x6586D652)
 I (E:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include\core_cm0plus.h)(0x60D3E8E2)

@@ -15,7 +15,7 @@ extern "C" {
 #define HAL_UART_MODULE_ENABLED
 #define HAL_SPI_MODULE_ENABLED
 #define HAL_EXTI_MODULE_ENABLED
-
+#define HAL_IWDG_MODULE_ENABLED
 #define HSE_VALUE            8000000U  
 #define HSE_STARTUP_TIMEOUT  100U      
 #define HSI_VALUE            24000000U 
@@ -33,7 +33,7 @@ extern "C" {
 #include "air001xx_hal_cortex.h"
 #include "air001xx_hal_spi.h"
 #include "air001xx_hal_spi_ex.h"
-
+#include "air001xx_hal_iwdg.h"
 
 
 

@@ -16,7 +16,7 @@ def set_led_color(led_index, color, serial_port):
     blue = color[2]
     data = bytes([0xEA, led_index, red, green, blue])
     serial_port.write(data)
-    print(f"LED {led_index}: {color}")
+    # print(f"LED {led_index}: {color}")
 
 class ColorPicker(QMainWindow):
     def __init__(self):
@@ -33,6 +33,8 @@ class ColorPicker(QMainWindow):
         self.updateColorsThread = UpdateColorsThread(self)
         self.updateColorsThread.colorUpdated.connect(self.update_led_color)
         self.updateColorsThread.start()
+        self.init_timer()
+        self.screen_mode = True  # 添加一个布尔变量，用于记录是否处于屏幕模式
 
     def load_config(self):
         self.config = configparser.ConfigParser()
@@ -173,6 +175,7 @@ class ColorPicker(QMainWindow):
 
     def update_mode(self, mode):
         self.mode = mode
+        self.screen_mode = mode == "Screen Color"  # 更新屏幕模式状态
         self.save_config()
         self.toggle_color_picker()
 
@@ -198,8 +201,19 @@ class ColorPicker(QMainWindow):
     def update_custom_colors(self):
         # 更新所有LED为选定的颜色
         for i in range(self.led_count):
-            time.sleep(0.02)
             self.update_led_color(i, (self.selected_color.red(), self.selected_color.green(), self.selected_color.blue()))
+
+    def init_timer(self):
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.send_keepalive_message)
+        self.timer.start(20000)  # 120000毫秒 = 2分钟
+
+    def send_keepalive_message(self):
+        # 仅在屏幕模式下发送消息
+        if self.screen_mode and self.serial_port and self.serial_port.is_open:
+            message = bytes([0xEB, 0xFF, 0xBE])
+            self.serial_port.write(message)
+            # print("Sent keepalive message: EB FF BE")
 
 class ScreenColorMode:
     def __init__(self, parent):
@@ -228,8 +242,8 @@ class ScreenColorMode:
             total_blue = 0
             pixel_count = 0
 
-            for y in range(120):
-                for x in range(120):
+            for y in range(100):
+                for x in range(100):
                     color = QColor(image.pixel(x, y))
                     total_red += color.red()
                     total_green += color.green()
@@ -262,7 +276,7 @@ class UpdateColorsThread(QThread):
             if self.parent.mode == "Screen Color":
                 self.screen_color_mode.update_colors()
 
-            self.msleep(10)  # 减少等待时间，提高刷新速度
+            self.msleep(5)  # 减少等待时间，提高刷新速度
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

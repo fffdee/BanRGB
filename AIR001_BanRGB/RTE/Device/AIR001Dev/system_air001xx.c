@@ -133,7 +133,7 @@ uint32_t VECT_SRAM_TAB[48]__attribute__((section(".ARM.__at_0x20000000")));
 
 /* re-define main function */
 int $Sub$$main(void)
-{
+ {
   uint8_t i;
   uint32_t *pFmcVect = (uint32_t *)(FLASH_BASE | VECT_TAB_OFFSET);
   for (i = 0; i < 48; i++)

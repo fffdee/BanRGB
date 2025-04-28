@@ -1,4 +1,6 @@
-./objects/main.o: User\main.c AIR001xx_HAL_Driver\Inc\air001xx_hal.h \
+./objects/air001xx_hal_iwdg.o: \
+  AIR001xx_HAL_Driver\Src\air001xx_hal_iwdg.c \
+  AIR001xx_HAL_Driver\Inc\air001xx_hal.h \
   AIR001xx_HAL_Driver\Inc\..\..\User\air001xx_hal_conf.h \
   AIR001xx_HAL_Driver\Inc\air001xx_hal_rcc.h \
   AIR001xx_HAL_Driver\Inc\air001xx_hal_def.h \
@@ -21,8 +23,4 @@
   AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h \
   AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h \
   AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h \
-  AIR001xx_HAL_Driver\Inc\air001xx_hal_iwdg.h User\uart\uart.h \
-  E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001_dev.h \
-  AIR001xx_HAL_Driver\Inc\air001xx_hal_uart.h \
-  E:\keil5\ARM\ARMCLANG\Bin\..\include\string.h User\main.h \
-  E:\keil5\ARM\ARMCLANG\Bin\..\include\stdlib.h
+  AIR001xx_HAL_Driver\Inc\air001xx_hal_iwdg.h

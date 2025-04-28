@@ -1,6 +1,7 @@
 #include "air001xx_it.h"
 #include "uart.h"
-
+#include "main.h"
+#include "string.h"
 void NMI_Handler(void)
 {
 }
@@ -25,19 +26,25 @@ void SysTick_Handler(void)
   HAL_IncTick();
 }
 
-extern uint8_t Rxflag;
+volatile uint8_t ch = 0;
+extern uint8_t rx_buffer[320]; // 接收缓冲区，假设最大接收256字节
 
+uint16_t count = 0;
 void USART1_IRQHandler(void) // 串口1中断
 {
-  uint8_t ch = 0;
+ 
 
   if (__HAL_UART_GET_FLAG(&UartHandle, UART_FLAG_RXNE) != RESET)
   {
-    ch = (uint16_t)READ_REG(UartHandle.Instance->DR);
-    WRITE_REG(UartHandle.Instance->DR, ch);
-  }
 
-  HAL_UART_IRQHandler(&UartHandle);
+    ch = (uint16_t)READ_REG(UartHandle.Instance->DR);
+		rx_buffer[count++] = ch;
+		if(count>319) count=0;
+    RxFlag = 1;
+  }
+	HAL_UART_IRQHandler(&UartHandle);
+			
+ 
 }
 
 /*

@@ -21,4 +21,5 @@
   AIR001xx_HAL_Driver\Inc\air001xx_hal_spi.h \
   AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h \
   AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h \
-  AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h
+  AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h \
+  AIR001xx_HAL_Driver\Inc\air001xx_hal_iwdg.h

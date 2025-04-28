@@ -23,4 +23,6 @@
   AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h \
   AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h \
   AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h \
-  AIR001xx_HAL_Driver\Inc\air001xx_hal_uart.h
+  AIR001xx_HAL_Driver\Inc\air001xx_hal_iwdg.h \
+  AIR001xx_HAL_Driver\Inc\air001xx_hal_uart.h User\main.h \
+  E:\keil5\ARM\ARMCLANG\Bin\..\include\string.h

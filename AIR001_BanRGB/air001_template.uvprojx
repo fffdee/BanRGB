@@ -185,7 +185,6 @@
             <uocXRam>0</uocXRam>
             <RvdsVP>0</RvdsVP>
             <RvdsMve>0</RvdsMve>
-            <RvdsCdeCp>0</RvdsCdeCp>
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -313,7 +312,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>2</Optim>
+            <Optim>6</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -352,7 +351,7 @@
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
             <useXO>0</useXO>
-            <ClangAsOpt>4</ClangAsOpt>
+            <uClangAs>0</uClangAs>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
@@ -491,6 +490,11 @@
               <FileType>1</FileType>
               <FilePath>.\AIR001xx_HAL_Driver\Src\air001xx_hal_spi.c</FilePath>
             </File>
+            <File>
+              <FileName>air001xx_hal_iwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\AIR001xx_HAL_Driver\Src\air001xx_hal_iwdg.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -530,21 +534,6 @@
               <FileName>spi.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\User\SPI\spi.c</FilePath>
-            </File>
-            <File>
-              <FileName>hsvrgb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\HSV2RGB\hsvrgb.c</FilePath>
-            </File>
-            <File>
-              <FileName>ws2812b.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\ws2812b\ws2812b.c</FilePath>
-            </File>
-            <File>
-              <FileName>def_conf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\DEF\def_conf.c</FilePath>
             </File>
           </Files>
         </Group>
