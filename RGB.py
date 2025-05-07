@@ -7,6 +7,7 @@ from PyQt5.QtGui import QGuiApplication, QColor, QPixmap, QImage, QIcon
 from PyQt5.QtCore import QTimer, Qt, QThread, pyqtSignal
 import configparser
 import os
+
 # 假设你有一个函数来控制 RGB 灯带
 def set_led_color(led_index, color, serial_port):
     # 将颜色转换为字节数据
@@ -161,9 +162,36 @@ class ColorPicker(QMainWindow):
         baudrate = int(self.baudrate_edit.text())
         try:
             self.serial_port = serial.Serial(port_name, baudrate, timeout=1)
+            # 读取 LED_MAP 数据并发送
+            self.send_led_map_data()
             QMessageBox.information(self, "Connected", f"Connected to {port_name} at {baudrate} baud")
+         
         except serial.SerialException as e:
             QMessageBox.critical(self, "Error", f"Failed to connect: {e}")
+
+    def send_led_map_data(self):
+        # 读取当前目录下的 .ini 文件中的 LED_MAP 数据
+        folder_path = os.getcwd()
+        all_data = []
+        for filename in os.listdir(folder_path):
+            if filename.endswith(".ini"):
+                file_path = os.path.join(folder_path, filename)
+                config = configparser.ConfigParser()
+                config.read(file_path)
+                if 'LED_MAP' in config:
+                    # 如果文件中有 [LED_MAP] 部分，读取其中的 data
+                    led_map_data = config['LED_MAP'].get('data', '')
+                    if led_map_data:
+                        # 将数据转换为字节
+                        data_bytes = bytes(map(int, led_map_data.split(',')))
+                        all_data.extend(data_bytes)
+        
+        # 构造发送的数据格式：0xEC, 数据长度, 数据
+        if all_data:
+            data_length = len(all_data)
+            send_data = bytes([0xEC, data_length]) + bytes(all_data)
+            self.serial_port.write(send_data)
+            print(f"Sent LED_MAP data: {send_data}")
 
     def update_led_color(self, led_index, color):
         avg_red, avg_green, avg_blue = color
