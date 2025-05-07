@@ -5,11 +5,11 @@
 #include "main.h"
 #include "stdint.h"
 #include "stdlib.h"
-#define TRAN_LIMIT 150
-#define TRAN_COUNT 6
+#define TRAN_LIMIT 200
+#define TRAN_COUNT 15
 #define RESET_COUNT 40
 #define HRESET_COUNT 100
-uint8_t rx_buffer[320] = {0}; // 接收缓冲区，假设最大接收256字节
+uint8_t rx_buffer[WS2812_NUMS*5] = {0}; // 接收缓冲区，假设最大接收256字节
 
 void Error_Handler(void);
 static void APP_SystemClockConfig(void); // RCC 时钟配置
@@ -20,16 +20,27 @@ extern volatile uint8_t ch;
  IWDG_HandleTypeDef   IwdgHandle;
 uint8_t led_map[WS2812_NUMS] = {
 
-  34,32,28,24,23,16,15,13,
-  35,33,29,25,22,17,14,12,
-  37,36,30,26,21,18,10,11,
-  39,38,31,27,20,19,8,9,
-  41,40,51,52,59,60,6,7,
-  43,42,50,53,58,61,4,5,
-  44,45,49,54,57,62,2,3,
-  46,47,48,55,56,63,0,1,
+  30,29,28,25,22,19,16,13,10,9,
+  32,31,26,23,20,17,14,12,7,8,
+  34,33,27,24,21,18,15,11,5,6,
+  36,35,42,45,48,51,54,57,3,4,
+  38,37,41,44,47,50,53,56,2,1,
+  39,40,43,46,49,52,55,58,59,0,
+ 
 
 };
+
+void smooth_color_transition(uint8_t *prev, uint8_t *curr) {
+  uint8_t i = 0;  
+	for (; i < 3; i++) {
+        if (curr[i] > prev[i] + 70) {
+            curr[i] = prev[i] + 70;
+        } else if (curr[i] < prev[i] - 70) {
+            curr[i] = prev[i] - 70;
+        }
+    }
+}
+
 void Color_Browse(void)
 {			
 				for(i=0;i<240;i++){
@@ -61,7 +72,8 @@ int main(void)
 	APP_SystemClockConfig();
 	Uart_Init();
 	SPI_CONFIG();
-
+	printf("RESET!");
+	__HAL_RCC_LSI_ENABLE();
   IwdgHandle.Instance = IWDG;                     /* 选择IWDG */
   IwdgHandle.Init.Prescaler = IWDG_PRESCALER_32;  /* 配置32分频 */
   IwdgHandle.Init.Reload = (1000);                /* IWDG计数器重装载值为1000，1s */
@@ -72,15 +84,19 @@ int main(void)
   }
 	while (1)
 	{	
-			for(i=0;i<320;i++){
+			for(i=0;i<WS2812_NUMS*5;i++){
 				
 				if(rx_buffer[i]==0xEA){
 								
 							uint8_t index  = led_map[rx_buffer[i+1]];
+							uint8_t count=0;
+							for(;count<3;count++){
+					
+										RGB_SHOW_NOW[index][count]= rx_buffer[i+2+count];
+										if(index==WS2812_NUMS-2)
+												RGB_SHOW_NOW[0][count]= rx_buffer[i+2+count];
+									}
 							
-							RGB_SHOW_NOW[index][0]= rx_buffer[i+2];
-							RGB_SHOW_NOW[index][1]= rx_buffer[i+3];
-							RGB_SHOW_NOW[index][2]= rx_buffer[i+4];
 							HAL_UART_IRQHandler(&UartHandle);
 						
 				}
@@ -115,6 +131,7 @@ int main(void)
 				rgb_range[0]+=RGB_SHOW_NOW[i][0];
 				rgb_range[1]+=RGB_SHOW_NOW[i][1];
 				rgb_range[2]+=RGB_SHOW_NOW[i][2];
+
 		}
 		for(i=0;i<3;i++){
 			rgb_range[i] = rgb_range[i]/WS2812_NUMS;
@@ -125,9 +142,12 @@ int main(void)
 //			WS2812B_SendRGB((unsigned char(*)[3])RGB_SHOW_NOW);
 //			tick = HAL_GetTick();
 //		}
-	
-			if(rgb_range[0]<TRAN_LIMIT &&rgb_range[1]<TRAN_LIMIT &&rgb_range[2]<TRAN_LIMIT ){
+			uint8_t total_rgb = (rgb_range[0]+rgb_range[1]+rgb_range[2])/3;
+			if(total_rgb<TRAN_LIMIT){
+//			if(rgb_range[0]<TRAN_LIMIT &&rgb_range[1]<TRAN_LIMIT &&rgb_range[2]<TRAN_LIMIT ){
 				WS2812B_SendRGB((unsigned char(*)[3])RGB_SHOW_NOW);
+//				printf("tran_Count:%d ,%d, %d",tran_count[0],tran_count[1],tran_count[2]);
+//				printf("rgb_range:%d ,%d, %d",rgb_range[0],rgb_range[1],rgb_range[2]);
 //				if(tran_count[0]>RESET_COUNT ||tran_count[1]>RESET_COUNT ||tran_count[2]>RESET_COUNT)
 //						if(resetFlag==1)
 //								NVIC_SystemReset(); 
@@ -136,21 +156,23 @@ int main(void)
 //						NVIC_SystemReset(); 
 			}else{
 					if(tran_count[0]>TRAN_COUNT ||tran_count[1]>TRAN_COUNT ||tran_count[2]>TRAN_COUNT ){
-							
-								if(resetFlag==1)
-								NVIC_SystemReset(); 
+						printf("tran_Count:%d ,%d, %d",tran_count[0],tran_count[1],tran_count[2]);
+						printf("rgb_range:%d ,%d, %d",rgb_range[0],rgb_range[1],rgb_range[2]);
+//								if(resetFlag==1)
+//								NVIC_SystemReset(); 
 								WS2812B_SendRGB((unsigned char(*)[3])RGB_SHOW_NOW);
-//							for(i=0;i<3;i++)
-//							rgb_range_old[i] = rgb_range[i];
+							for(i=0;i<3;i++)
+							rgb_range_old[i] = rgb_range[i];
 							
 					}
 				}
-			for(i=0;i<3;i++)
-						rgb_range_old[i] = rgb_range[i];
+//			for(i=0;i<3;i++)
+//						rgb_range_old[i] = rgb_range[i];
 
 		if (HAL_IWDG_Refresh(&IwdgHandle) != HAL_OK)
     {
 			rgbflag=1;
+			printf("reset!");
 			for(i=0;i<WS2812_NUMS;i++)
 				SetColor(i,red);
 			NVIC_SystemReset(); 
