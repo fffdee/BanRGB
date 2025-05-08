@@ -343,10 +343,11 @@ ARM Macro Assembler    Page 6
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M0+ --depend=.\o
 bjects\startup_air001_dev.d -o.\objects\startup_air001_dev.o -I.\RTE\_Target_1 
--IE:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include -IE:\keil5\pack\Keil\AIR001_
-DFP\1.1.2\Device\Include --predefine="__MICROLIB SETA 1" --predefine="__UVISION
-_VERSION SETA 527" --predefine="_RTE_ SETA 1" --list=.\listings\startup_air001_
-dev.lst RTE\Device\AIR001Dev\startup_air001_dev.s
+-ID:\app\keil\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include -ID:\app\keil\Packs\Keil
+\AIR001_DFP\1.1.2\Device\Include --predefine="__MICROLIB SETA 1" --predefine="_
+_UVISION_VERSION SETA 535" --predefine="_RTE_ SETA 1" --predefine="_RTE_ SETA 1
+" --list=.\listings\startup_air001_dev.lst RTE\Device\AIR001Dev\startup_air001_
+dev.s
 
 
 

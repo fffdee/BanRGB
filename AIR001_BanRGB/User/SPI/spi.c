@@ -1,11 +1,11 @@
 #include "spi.h"
 #include "main.h"
+#include "rgb.h"
 #include "air001xx_hal.h"
 #include "air001xx.h"
- SPI_HandleTypeDef Spi1Handle;
- unsigned char data[WS2812_NUMS * 24];
+SPI_HandleTypeDef Spi1Handle;
+unsigned char data[WS2812_MAX_NUMS * 24];
 
-uint8_t RGB_SHOW_NOW[WS2812_NUMS][3] = {0};
 void HAL_MspInit(void)
 {
     __HAL_RCC_SYSCFG_CLK_ENABLE();
@@ -81,17 +81,17 @@ void WS2812_RESET(void)
 }
 /**
  * @brief   将二维数组指针的RGB数据通过SPI发出去，WS2812b的数据，为GRB格式，接受的数据依次按位保存在G、R、B，每一个都是8位0-255
- * @param   (*RGB)[3]  RGB_SHOW_TEMP或者RGB_SHOW_NOW数组；
+ * @param   (*RGB)[3]  RGB_SHOW_TEMP或者rgb_t.RGB_SHOW_NOW数组；
  * @retval  无
 */
-void WS2812B_SendRGB(unsigned char (*RGB)[3])    //RGB_SHOW_NOW[18][3]  就一直发GRBGRB就行；5
+void WS2812B_SendRGB(unsigned char (*RGB)[3])    //rgb_t.RGB_SHOW_NOW[18][3]  就一直发GRBGRB就行；5
 {
 
   unsigned char *ptr = data;
 
 int led= 0;
 	int i = 0;
-for(led=0;led < WS2812_NUMS; led++)
+for(led=0;led < WS2812_MAX_NUMS; led++)
 {
     // 将G数据转换为WS2812B数据格式
   for (i= 0; i < 8; i++)
@@ -133,12 +133,12 @@ for(led=0;led < WS2812_NUMS; led++)
     }
 
   }
-	HAL_SPI_Transmit(&Spi1Handle, &data[0], WS2812_NUMS*24,0xFFFF);
-//		if(WS2812_NUMS<36){
-//				HAL_SPI_Transmit(&Spi1Handle, data, WS2812_NUMS*24,0xFFFF);
+	HAL_SPI_Transmit(&Spi1Handle, &data[0], WS2812_MAX_NUMS*24,0xFFFF);
+//		if(WS2812_MAX_NUMS<36){
+//				HAL_SPI_Transmit(&Spi1Handle, data, WS2812_MAX_NUMS*24,0xFFFF);
 //		}else{
 //				HAL_SPI_Transmit(&Spi1Handle, data, 36*24,0xFFFF);
-//				HAL_SPI_Transmit(&Spi1Handle, &data[36*24], (WS2812_NUMS-36)*24,0xFFFF);
+//				HAL_SPI_Transmit(&Spi1Handle, &data[36*24], (WS2812_MAX_NUMS-36)*24,0xFFFF);
 //		}
 
 }
@@ -151,9 +151,9 @@ for(led=0;led < WS2812_NUMS; led++)
 
 void SetColor(uint8_t index, uint8_t* color){
 
-		RGB_SHOW_NOW[index][0]=color[0];
-		RGB_SHOW_NOW[index][1]=color[1];
-		RGB_SHOW_NOW[index][2]=color[2];
+		rgb_t.RGB_SHOW_NOW[index][0]=color[0];
+		rgb_t.RGB_SHOW_NOW[index][1]=color[1];
+		rgb_t.RGB_SHOW_NOW[index][2]=color[2];
 		
 }
 

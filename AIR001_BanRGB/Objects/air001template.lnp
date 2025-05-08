@@ -14,7 +14,7 @@
 ".\objects\air001xx_it.o"
 ".\objects\main.o"
 ".\objects\uart.o"
-".\objects\spi_1.o"
+".\objects\spi.o"
 ".\objects\startup_air001_dev.o"
 ".\objects\system_air001xx.o"
 --library_type=microlib --ro-base 0x08000000 --entry 0x08000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols

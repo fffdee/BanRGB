@@ -15,7 +15,7 @@
 
 #include "air001xx_hal_spi.h"
 #include "main.h"
-
+#include "rgb.h"
 
 extern  SPI_HandleTypeDef Spi1Handle;
 
@@ -23,9 +23,8 @@ void SPI_CONFIG(void);
 void WS2812B_SendRGB(unsigned char (*RGB)[3]) ;
 void WS2812_RESET(void);
 void SetColor(uint8_t index, uint8_t* color);
- extern uint8_t RGB_SHOW_NOW[WS2812_NUMS][3];
 
-void ReadRGBDataFromFlash(uint8_t Destination_Array[WS2812_NUMS][3]);
-void RGB_Storage(uint8_t Source_Array[WS2812_NUMS][3]);
+void ReadRGBDataFromFlash(uint8_t Destination_Array[WS2812_MAX_NUMS][3]);
+void RGB_Storage(uint8_t Source_Array[WS2812_MAX_NUMS][3]);
 
 #endif /*spi_H_*/
