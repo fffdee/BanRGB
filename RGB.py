@@ -7,7 +7,8 @@ from PyQt5.QtGui import QGuiApplication, QColor, QPixmap, QImage, QIcon
 from PyQt5.QtCore import QTimer, Qt, QThread, pyqtSignal
 import configparser
 import os
-
+from PIL import ImageGrab
+from PIL import Image
 # 假设你有一个函数来控制 RGB 灯带
 def set_led_color(led_index, color, serial_port):
     # 将颜色转换为字节数据
@@ -16,7 +17,7 @@ def set_led_color(led_index, color, serial_port):
     blue = color[2]
     data = bytes([0xEA, led_index, red, green, blue])
     serial_port.write(data)
-    # print(f"LED {led_index}: {color}")
+    print(f"LED {led_index}: {color}")
 
 class ColorPicker(QMainWindow):
     def __init__(self):
@@ -25,6 +26,8 @@ class ColorPicker(QMainWindow):
         self.serial_port = None
         self.length = 8  # 默认长
         self.width = 8  # 默认宽
+        self.rows = 10  # 默认行数
+        self.cols = 6  # 默认列数
         self.led_count = (self.length // 2) * ((self.width // 2) + 1)  # 根据新公式计算默认灯数量
         self.selected_color = QColor(255, 255, 255)  # 默认颜色为白色
         self.mode = "Screen Color"  # 默认模式
@@ -32,9 +35,9 @@ class ColorPicker(QMainWindow):
         self.config_file = "config.ini"
         self.load_config()
         self.initUI()
-        self.updateColorsThread = UpdateColorsThread(self)
-        self.updateColorsThread.colorUpdated.connect(self.update_led_color)
-        self.updateColorsThread.start()
+        self.update_colors_thread = UpdateColorsThread(self)
+        self.update_colors_thread.colorUpdated.connect(self.update_led_color)
+        self.update_colors_thread.start()
         self.init_timer()
         self.screen_mode = True  # 添加一个布尔变量，用于记录是否处于屏幕模式
         self.serial_reader_thread = SerialReaderThread(self)  # 添加串口读取线程
@@ -50,13 +53,17 @@ class ColorPicker(QMainWindow):
                 'CustomColorGreen': '255',
                 'CustomColorBlue': '255',
                 'Length': '20',  # 默认长
-                'Width': '10'    # 默认宽
+                'Width': '10',    # 默认宽
+                'Rows': '10',      # 默认行数
+                'Cols': '6'       # 默认列数
             }
             with open(self.config_file, 'w') as configfile:
                 self.config.write(configfile)
             self.length = 20
             self.width = 10
-            self.led_count = (self.length // 2) * ((self.width // 2) + 1)
+            self.rows = 10
+            self.cols = 6
+            self.led_count = (self.length * 2) + (self.width * 2)
         else:
             # 读取配置文件
             self.config.read(self.config_file)
@@ -68,7 +75,9 @@ class ColorPicker(QMainWindow):
             )
             self.length = int(self.config['DEFAULT']['Length'])
             self.width = int(self.config['DEFAULT']['Width'])
-            self.led_count = (self.length // 2) * ((self.width // 2) + 1)
+            self.rows = int(self.config['DEFAULT']['Rows'])
+            self.cols = int(self.config['DEFAULT']['Cols'])
+            self.led_count = (self.length * 2) + (self.width * 2)
 
     def save_config(self):
         self.config['DEFAULT'] = {
@@ -77,15 +86,17 @@ class ColorPicker(QMainWindow):
             'CustomColorGreen': str(self.selected_color.green()),
             'CustomColorBlue': str(self.selected_color.blue()),
             'Length': str(self.length),
-            'Width': str(self.width)
+            'Width': str(self.width),
+            'Rows': str(self.rows),
+            'Cols': str(self.cols)
         }
         with open(self.config_file, 'w') as configfile:
             self.config.write(configfile)
-        self.led_count = (self.length // 2) * ((self.width // 2) + 1)
+        self.led_count = (self.length * 2) + (self.width * 2)
 
     def initUI(self):
         self.setWindowTitle('BanRGB')
-        self.setGeometry(100, 100, 100, 100)
+        self.setGeometry(100, 100, 300, 200)
         self.setWindowIcon(QIcon('BanGO.png'))
         self.central_widget = QWidget()
         self.setCentralWidget(self.central_widget)
@@ -110,31 +121,15 @@ class ColorPicker(QMainWindow):
         self.mode_combo.addItems(["Screen Color", "Custom"])
         self.mode_combo.currentTextChanged.connect(self.update_mode)
 
-        # 新增长宽布局
-        self.length_width_layout = QHBoxLayout()
-        self.length_edit = QLineEdit(str(self.length))
-        self.width_edit = QLineEdit(str(self.width))
-        self.update_button = QPushButton("Update")
-        self.update_button.clicked.connect(self.update_led_count_and_config)
-        self.total_label = QLabel(f"Total: {self.led_count}")
-
         self.serial_layout.addWidget(self.serial_combo)
         self.serial_layout.addWidget(self.baudrate_edit)
         self.serial_layout.addWidget(self.connect_button)
-
-        self.length_width_layout.addWidget(QLabel("Length:"))
-        self.length_width_layout.addWidget(self.length_edit)
-        self.length_width_layout.addWidget(QLabel("Width:"))
-        self.length_width_layout.addWidget(self.width_edit)
-        self.length_width_layout.addWidget(self.update_button)
-        self.length_width_layout.addWidget(self.total_label)
 
         self.mode_layout.addWidget(QLabel("Mode:"))
         self.mode_layout.addWidget(self.mode_combo)
 
         self.main_layout.addLayout(self.grid_layout)
         self.main_layout.addLayout(self.serial_layout)
-        self.main_layout.addLayout(self.length_width_layout)
         self.main_layout.addLayout(self.mode_layout)
 
         self.update_serial_ports()
@@ -145,7 +140,9 @@ class ColorPicker(QMainWindow):
         try:
             self.length = int(self.length_edit.text())
             self.width = int(self.width_edit.text())
-            self.led_count = (self.length // 2) * ((self.width // 2) + 1)
+            self.rows = int(self.rows/2)
+            self.cols = int(self.cols/2)+1
+            self.led_count = (self.length * 2)+ (self.width*2)
             self.total_label.setText(f"Total: {self.led_count}")
             self.create_led_grid()
             self.save_config()
@@ -165,13 +162,12 @@ class ColorPicker(QMainWindow):
             # 读取 LED_MAP 数据并发送
             self.send_led_map_data()
             QMessageBox.information(self, "Connected", f"Connected to {port_name} at {baudrate} baud")
-         
         except serial.SerialException as e:
             QMessageBox.critical(self, "Error", f"Failed to connect: {e}")
 
     def send_led_map_data(self):
         # 读取当前目录下的 .ini 文件中的 LED_MAP 数据
-        folder_path = os.getcwd()
+        folder_path = os.path.dirname(__file__)
         all_data = []
         for filename in os.listdir(folder_path):
             if filename.endswith(".ini"):
@@ -206,8 +202,8 @@ class ColorPicker(QMainWindow):
             self.grid_layout.itemAt(i).widget().deleteLater()
 
         self.led_labels = []
-        rows = self.width // 2 + 1
-        cols = self.length // 2 
+        rows = self.rows  # 使用配置文件中的行数
+        cols = self.cols  # 使用配置文件中的列数
         print("rows is : ",rows )
         print("cols is : ",cols )
         for i in range(rows):
@@ -252,7 +248,7 @@ class ColorPicker(QMainWindow):
     def init_timer(self):
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.send_keepalive_message)
-        self.timer.start(1000)  # 120000毫秒 = 2分钟
+    #     self.timer.start(1000)  # 120000毫秒 = 2分钟
 
     def send_keepalive_message(self):
         # 仅在屏幕模式下发送消息
@@ -260,52 +256,31 @@ class ColorPicker(QMainWindow):
          for i in range(self.led_count):
             if i < len(self.led_labels):
                 self.update_led_color(i, (self.selected_color.red(), self.selected_color.green(), self.selected_color.blue()))
-            # print("Sent keepalive message: EB FF BE")
+        print(self.led_count)
 
 class ScreenColorMode:
     def __init__(self, parent):
         self.parent = parent
 
     def update_colors(self):
-        screen_geometry = QGuiApplication.primaryScreen().geometry()
-        screen_width = screen_geometry.width()
-        screen_height = screen_geometry.height()
-
-        # 根据新的公式计算行列
-        rows = self.parent.width // 2+ 1
-        cols = self.parent.length // 2 
-        region_width = screen_width // cols
-        region_height = screen_height // rows
-
+        # 捕获整个屏幕的截图
+        screen = ImageGrab.grab()
+        # 调整图像大小为 rows*cols
+        resized_screen = screen.resize((self.parent.cols, self.parent.rows ), Image.Resampling.LANCZOS)
+        resized_screen.save('screen_capture.png')
+        # 遍历每个像素，获取颜色值
         for led_index in range(self.parent.led_count):
-            row = led_index // cols
-            col = led_index % cols
-            x = col * region_width
-            y = row * region_height
-            pixmap = QGuiApplication.primaryScreen().grabWindow(0, x, y, region_width, region_height)
-            image = pixmap.toImage()
-
-            total_red = 0
-            total_green = 0
-            total_blue = 0
-            pixel_count = 0
-
-            for y in range(100):
-                for x in range(100):
-                    color = QColor(image.pixel(x, y))
-                    total_red += color.red()
-                    total_green += color.green()
-                    total_blue += color.blue()
-                    pixel_count += 1
-
-            avg_red = total_red // pixel_count
-            avg_green = total_green // pixel_count
-            avg_blue = total_blue // pixel_count
-
-            rgb888 = (avg_red, avg_green, avg_blue)
+            y = led_index // self.parent.cols
+            x = led_index % self.parent.cols
+          
+            pixel = resized_screen.getpixel((x, y))
+           
+            r, g, b = pixel[0], pixel[1], pixel[2]
             
             # 发出信号更新 GUI
-            self.parent.updateColorsThread.colorUpdated.emit(led_index, rgb888)
+            self.parent.update_colors_thread.colorUpdated.emit(led_index, (r, g, b))
+            
+         
 
 class UpdateColorsThread(QThread):
     colorUpdated = pyqtSignal(int, tuple)
@@ -323,8 +298,9 @@ class UpdateColorsThread(QThread):
 
             if self.parent.mode == "Screen Color":
                 self.screen_color_mode.update_colors()
+                self.msleep(50) 
 
-            self.msleep(5)  # 减少等待时间，提高刷新速度
+           
 
 class SerialReaderThread(QThread):
     def __init__(self, parent=None):
@@ -342,6 +318,10 @@ class SerialReaderThread(QThread):
                         print("Received data:", data)
                 except serial.SerialException as e:
                     print("Error reading serial port:", e)
+                    self.parent.serial_port.close()  # 关闭串口
+                    self.parent.serial_port = None  # 确保串口对象为 None
+                    QMessageBox.information(self.parent, "Disconnected", "Serial port disconnected unexpectedly.")
+                    self.parent.serial_reader_thread = None  # 确保串口读取线程为 None
             self.msleep(10)  # 等待10ms
 
 if __name__ == '__main__':
