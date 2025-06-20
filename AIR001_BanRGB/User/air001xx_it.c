@@ -27,8 +27,9 @@ void SysTick_Handler(void)
   HAL_IncTick();
 }
 
+
 volatile uint8_t ch = 0;
-extern uint8_t rx_buffer[200]; // 接收缓冲区，假设最大接收256字节
+extern uint8_t rx_buffer[WS2812_MAX_NUMS*5]; // 接收缓冲区，假设最大接收256字节
 
 uint16_t count = 0;
 void USART1_IRQHandler(void) // 串口1中断
@@ -40,7 +41,7 @@ void USART1_IRQHandler(void) // 串口1中断
 
     ch = (uint16_t)READ_REG(UartHandle.Instance->DR);
 		rx_buffer[count++] = ch;
-		if(count>199) count=0;
+		if(count>(rgb_t.total*5)-1) count=0;
   }
 	HAL_UART_IRQHandler(&UartHandle);
 			

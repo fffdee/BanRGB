@@ -52,45 +52,45 @@ ARM Macro Assembler    Page 1
    32 00000000         ;   <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
    33 00000000         ; </h>
    34 00000000         
-   35 00000000 00000600 
+   35 00000000 00000180 
                        Stack_Size
-                               EQU              0x00000600
+                               EQU              0x00000180
    36 00000000         
    37 00000000                 AREA             STACK, NOINIT, READWRITE, ALIGN
 =3
    38 00000000         Stack_Mem
                                SPACE            Stack_Size
-   39 00000600         __initial_sp
-   40 00000600         
-   41 00000600         
+   39 00000180         __initial_sp
+   40 00000180         
+   41 00000180         
 
 
 
 ARM Macro Assembler    Page 2 
 
 
-   42 00000600         ; <h> Heap Configuration
-   43 00000600         ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
-   44 00000600         ; </h>
-   45 00000600         
-   46 00000600 00000500 
+   42 00000180         ; <h> Heap Configuration
+   43 00000180         ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
+   44 00000180         ; </h>
+   45 00000180         
+   46 00000180 00000180 
                        Heap_Size
-                               EQU              0x00000500
-   47 00000600         
-   48 00000600                 AREA             HEAP, NOINIT, READWRITE, ALIGN=
+                               EQU              0x00000180
+   47 00000180         
+   48 00000180                 AREA             HEAP, NOINIT, READWRITE, ALIGN=
 3
    49 00000000         __heap_base
    50 00000000         Heap_Mem
                                SPACE            Heap_Size
-   51 00000500         __heap_limit
-   52 00000500         
-   53 00000500         
-   54 00000500                 PRESERVE8
-   55 00000500                 THUMB
-   56 00000500         
-   57 00000500         
-   58 00000500         ; Vector Table Mapped to Address 0 at Reset
-   59 00000500                 AREA             RESET, DATA, READONLY
+   51 00000180         __heap_limit
+   52 00000180         
+   53 00000180         
+   54 00000180                 PRESERVE8
+   55 00000180                 THUMB
+   56 00000180         
+   57 00000180         
+   58 00000180         ; Vector Table Mapped to Address 0 at Reset
+   59 00000180                 AREA             RESET, DATA, READONLY
    60 00000000                 EXPORT           __Vectors
    61 00000000                 EXPORT           __Vectors_End
    62 00000000                 EXPORT           __Vectors_Size
@@ -343,11 +343,10 @@ ARM Macro Assembler    Page 6
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M0+ --depend=.\o
 bjects\startup_air001_dev.d -o.\objects\startup_air001_dev.o -I.\RTE\_Target_1 
--ID:\app\keil\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include -ID:\app\keil\Packs\Keil
-\AIR001_DFP\1.1.2\Device\Include --predefine="__MICROLIB SETA 1" --predefine="_
-_UVISION_VERSION SETA 535" --predefine="_RTE_ SETA 1" --predefine="_RTE_ SETA 1
-" --list=.\listings\startup_air001_dev.lst RTE\Device\AIR001Dev\startup_air001_
-dev.s
+-IE:\keil5\pack\ARM\CMSIS\5.8.0\CMSIS\Core\Include -IE:\keil5\pack\Keil\AIR001_
+DFP\1.1.2\Device\Include --predefine="__MICROLIB SETA 1" --predefine="__UVISION
+_VERSION SETA 527" --predefine="_RTE_ SETA 1" --list=.\listings\startup_air001_
+dev.lst RTE\Device\AIR001Dev\startup_air001_dev.s
 
 
 
@@ -370,7 +369,7 @@ Symbol: Stack_Mem
    Uses
       None
 Comment: Stack_Mem unused
-__initial_sp 00000600
+__initial_sp 00000180
 
 Symbol: __initial_sp
    Definitions
@@ -410,7 +409,7 @@ Symbol: __heap_base
    Uses
       At line 219 in file RTE\Device\AIR001Dev\startup_air001_dev.s
 Comment: __heap_base used once
-__heap_limit 00000500
+__heap_limit 00000180
 
 Symbol: __heap_limit
    Definitions
@@ -775,7 +774,7 @@ Symbol: WWDG_IRQHandler
 ARM Macro Assembler    Page 1 Alphabetic symbol ordering
 Absolute symbols
 
-Heap_Size 00000500
+Heap_Size 00000180
 
 Symbol: Heap_Size
    Definitions
@@ -783,7 +782,7 @@ Symbol: Heap_Size
    Uses
       At line 50 in file RTE\Device\AIR001Dev\startup_air001_dev.s
 Comment: Heap_Size used once
-Stack_Size 00000600
+Stack_Size 00000180
 
 Symbol: Stack_Size
    Definitions

@@ -23,6 +23,7 @@
   AIR001xx_HAL_Driver\Inc\air001xx_hal_dma.h \
   AIR001xx_HAL_Driver\Inc\air001xx_hal_dma_ex.h \
   AIR001xx_HAL_Driver\Inc\air001xx_hal_spi_ex.h \
+  AIR001xx_HAL_Driver\Inc\air001xx_hal_iwdg.h \
   E:\keil5\pack\Keil\AIR001_DFP\1.1.2\Device\Include\air001_dev.h \
-  User\flash\flash.h User\HSV2RGB\hsvrgb.h User\SPI\spi.h \
-  E:\keil5\ARM\ARMCLANG\Bin\..\include\math.h
+  User\flash\flash.h User\HSV2RGB\hsvrgb.h User\SPI\spi.h User\main.h \
+  User\rgb.h E:\keil5\ARM\ARMCLANG\Bin\..\include\math.h

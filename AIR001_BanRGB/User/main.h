@@ -5,5 +5,4 @@
 
 
 
-extern uint8_t RxFlag;
 #endif
