@@ -1,0 +1,61 @@
+#include "air001xx_it.h"
+#include "uart.h"
+#include "main.h"
+#include "string.h"
+#include "rgb.h"
+void NMI_Handler(void)
+{
+}
+
+void HardFault_Handler(void)
+{
+  while (1)
+  {
+  }
+}
+
+void SVC_Handler(void)
+{
+}
+
+void PendSV_Handler(void)
+{
+}
+
+void SysTick_Handler(void)
+{
+  HAL_IncTick();
+}
+
+
+volatile uint8_t ch = 0;
+extern uint8_t rx_buffer[WS2812_MAX_NUMS*5]; // 接收缓冲区
+
+uint16_t count = 0;
+
+// 握手响应函数
+void Handle_Handshake(void)
+{
+    const char* response = "BANRGB_OK\n";
+    HAL_UART_Transmit(&UartHandle, (uint8_t*)response, strlen(response), 1000);
+}
+
+void USART1_IRQHandler(void) // 串口1中断
+{
+    if (__HAL_UART_GET_FLAG(&UartHandle, UART_FLAG_RXNE) != RESET)
+    {
+        ch = (uint16_t)READ_REG(UartHandle.Instance->DR);
+        
+        // 处理握手命令 'E'
+        if(ch == 'E' || ch == 0x45) {
+            Handle_Handshake();
+            count = 0; // 重置计数器
+        }
+        else {
+            rx_buffer[count++] = ch;
+            if(count > (rgb_t.total*5)-1) count = 0;
+        }
+    }
+    HAL_UART_IRQHandler(&UartHandle);
+}
+
